@@ -29,8 +29,8 @@ public class Plugin : BaseUnityPlugin
 	private static int messageIndex = 0;
 	
 	// FOR TESTING:
-	//public static string lastMoon = "";
-	//public static bool isFirstRun = true;
+	public static string lastMoon = "";
+	public static bool isFirstRun = true;
 	
 	private void Awake()
 	{
@@ -105,7 +105,7 @@ public class Plugin : BaseUnityPlugin
 public class StartOfRoundPatch
 {
 	[HarmonyPrefix] // prefix so it runs before the original method, otherwise will show after moon is finished loading
-	[HarmonyPatch("StartGame")]
+	[HarmonyPatch("SceneManager_OnLoad")]
 	public static void OnStartGame()
 	{
 		string message = Plugin.Instance.GetNextMessage();
