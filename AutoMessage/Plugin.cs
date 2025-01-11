@@ -29,8 +29,8 @@ public class Plugin : BaseUnityPlugin
 	private static int messageIndex = 0;
 	
 	// FOR TESTING:
-	public static string lastMoon = "";
-	public static bool isFirstRun = true;
+	//public static string lastMoon = "";
+	//public static bool isFirstRun = true;
 	
 	private void Awake()
 	{
@@ -90,7 +90,6 @@ public class Plugin : BaseUnityPlugin
 		}
 	}
 	
-	// Function to get the next message
 	public string GetNextMessage()
 	{
 		string message = messages[messageIndex];
@@ -128,9 +127,8 @@ public class MoonSelectionPatch
 		
 		if (Plugin.lastMoon != currentMoon)
 		{
-			if (!Plugin.isFirstRun)
+			if (!Plugin.isFirstRun) // currentMoon will update when starting a session, don't want a notif for that
 			{
-				// Get the next message from the list
 				string message = Plugin.Instance.GetNextMessage();
 				string title = Plugin.Instance.title;
 				Plugin.Instance.DebugLog(title, message);
