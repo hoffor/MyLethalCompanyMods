@@ -99,6 +99,7 @@ public class StartOfRoundPatch
 	private static readonly BepInEx.Logging.ManualLogSource Log = BepInEx.Logging.Logger.CreateLogSource("AutoMessage");
 	
 	private static RectTransform foundObjectRectTransform;
+	private static Transform foundObjectTransform;
 	private static GameObject foundObject;
 	
 	private static Vector3 startingPosition;
@@ -108,7 +109,19 @@ public class StartOfRoundPatch
 	[HarmonyPatch("SceneManager_OnLoad")]
 	public static void OnStartGame()
 	{
-		// adjust tips panel size and positioning so it's more visible behind the overlays that appear and so more text can fit
+		// effectively crop the darken overlay (by just moving it down) so it is no longer overlapping our panel
+		// this was easier than trying to figure out how to change its render order lol
+		foundObject = GameObject.Find("Systems/UI/Canvas/LoadingText/DarkenScreen");
+		if (foundObject != null)
+		{
+			foundObjectTransform = foundObject.GetComponent<Transform>();
+			if (foundObjectTransform != null)
+			{
+				foundObjectTransform.localPosition = new Vector3(0.0002f, -365f, 0);
+			}
+		}
+		
+		// adjust tips panel size and positioning so it's more visible behind the multi-scrap scan overlay if it's visible and so more text can fit
 		// this is inefficient ugly code but also i am very tired
 		foundObject = GameObject.Find("Systems/UI/Canvas/IngamePlayerHUD/SpecialHUDGraphics/HintPanelContainer/Image");
 		if (foundObject != null)
