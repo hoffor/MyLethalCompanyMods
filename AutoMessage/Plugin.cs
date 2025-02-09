@@ -15,7 +15,7 @@ namespace AutoMessage;
 
 public static class PluginMetadata
 {
-	public const string PLUGIN_VERSION = "1.2.0";
+	public const string PLUGIN_VERSION = "2.0.0";
 	public const string PLUGIN_NAME = "AutoMessage";
 	public const string PLUGIN_AUTHOR = "hoffr";
 	public const string PLUGIN_GUID = PLUGIN_AUTHOR + "." + PLUGIN_NAME;
