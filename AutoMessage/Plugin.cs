@@ -15,7 +15,7 @@ namespace AutoMessage;
 
 public static class PluginMetadata
 {
-	public const string PLUGIN_VERSION = "2.0.0";
+	public const string PLUGIN_VERSION = "2.0.1";
 	public const string PLUGIN_NAME = "AutoMessage";
 	public const string PLUGIN_AUTHOR = "hoffr";
 	public const string PLUGIN_GUID = PLUGIN_AUTHOR + "." + PLUGIN_NAME;
@@ -119,7 +119,7 @@ public class Plugin : BaseUnityPlugin
 			ConstructGameObject();
 		}
 		SetMessage(GetNextMessage());
-		StartCoroutine(MonitorDarkenScreen());
+		CoroutineRunner.Instance.StartCoroutine(MonitorDarkenScreen());
 	}
 	
 	
@@ -194,6 +194,26 @@ public class Plugin : BaseUnityPlugin
 				break;
 			}
 			yield return new WaitForSeconds(0.2f);
+		}
+	}
+}
+
+
+public class CoroutineRunner : MonoBehaviour
+{
+	private static CoroutineRunner instance;
+
+	public static CoroutineRunner Instance
+	{
+		get
+		{
+			if (instance == null)
+			{
+				GameObject obj = new GameObject("AutoMessageCoroutineRunner");
+				instance = obj.AddComponent<CoroutineRunner>();
+				DontDestroyOnLoad(obj);
+			}
+			return instance;
 		}
 	}
 }

@@ -5,7 +5,7 @@
 	<RootNamespace>AutoMessage</RootNamespace>
 	<AssemblyName>AutoMessage</AssemblyName>
 	<Product>AutoMessage</Product>
-	<Version>1.2.0</Version>
+	<Version>2.0.1</Version>
 	<LangVersion>latest</LangVersion>
 	<RestoreAdditionalProjectSources>
 	  https://api.nuget.org/v3/index.json;
